@@ -11,26 +11,38 @@ public class Account {
 		this.iban = iban;
 		this.balance = 0.0;
 	}
-	
+
 	public Account(String iban, double balance) { // constructor #2
 		this.iban = iban;
 		this.balance = balance;
 	}
+
+	public String getIban() {
+		return this.iban;
+	}
+
+	public double getBalance() {
+		return this.balance;
+	}
+	
 	// business method
 	public boolean deposit(double amount) {
 		// validation
-		if (amount <= 0.0) return false;
+		if (amount <= 0.0)
+			return false;
 		// business logic
 		this.balance = this.balance + amount;
 		return true;
 	}
-	
+
 	// business method
 	public boolean withdraw(double amount) {
 		// validation rule
-		if (amount <= 0.0) return false;
+		if (amount <= 0.0)
+			return false;
 		// business rule
-		if (amount > this.balance) return false;
+		if (amount > this.balance)
+			return false;
 		// business logic
 		this.balance = this.balance - amount;
 		return true;
