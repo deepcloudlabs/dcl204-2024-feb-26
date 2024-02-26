@@ -1,6 +1,6 @@
 package com.example.banking.domain;
 
-public class Account {
+public class Account extends Object {
 	// members: attributes, methods
 	// attributes: iban, balance
 	private final String iban; // hidden?
@@ -46,5 +46,10 @@ public class Account {
 		// business logic
 		this.balance = this.balance - amount;
 		return true;
+	}
+	
+	public String toString() {
+		return "Account[iban: %s, balance: %16.2f]".formatted(
+				this.iban,this.balance);
 	}
 }
