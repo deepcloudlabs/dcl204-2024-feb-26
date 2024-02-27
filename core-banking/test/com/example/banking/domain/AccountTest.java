@@ -1,19 +1,21 @@
 package com.example.banking.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 @DisplayName("An account")
 class AccountTest {
 
 	@DisplayName("successfully created")
-	@Test
-	void createAccountSuccessfully() {
-		Account account = new Account("tr1", 10_000);
-		assertEquals("tr1", account.getIban());
-		assertEquals(10_000, account.getBalance());
+	@ParameterizedTest
+	@CsvFileSource( resources = "accounts.csv")
+	void createAccountSuccessfully(String iban,double balance) {
+		Account account = new Account(iban, balance);
+		assertEquals(iban, account.getIban());
+		assertEquals(balance, account.getBalance());
 	}
 
 }
