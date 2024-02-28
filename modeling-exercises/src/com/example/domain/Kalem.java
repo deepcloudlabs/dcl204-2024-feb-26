@@ -2,6 +2,7 @@ package com.example.domain;
 
 // Domain-Driven Design
 // Entity
+@SuppressWarnings("unused")
 public class Kalem {
 	private QrCode qrCode;	
 	private Renk renk;
