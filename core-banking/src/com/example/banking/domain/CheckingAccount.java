@@ -33,7 +33,7 @@ public class CheckingAccount extends Account {
 	}
 	@Override
 	public String toString() {
-		return "CehckingAccount[iban: %-24s, balance: %-16.2f, overdraftAmount: %8.3f]".formatted(
-				this.getBalance(),this.balance,this.overdraftAmount);
+		return "CheckingAccount[iban: %-24s, balance: %-16.2f, overdraftAmount: %8.3f]".formatted(
+				this.getIban(),this.balance,this.overdraftAmount);
 	}
 }
