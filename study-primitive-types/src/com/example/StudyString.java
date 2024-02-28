@@ -1,5 +1,6 @@
 package com.example;
 
+@SuppressWarnings("unused")
 public class StudyString {
 
 	public static void main(String[] args) {
