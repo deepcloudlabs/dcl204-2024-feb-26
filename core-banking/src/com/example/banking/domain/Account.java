@@ -1,17 +1,23 @@
 package com.example.banking.domain;
-
+// OOP: i) Class/Object -> Encapsulation + Information Hiding Principle
+//         Modeling/Abstraction
+//         Domain Class
 public class Account extends Object {
 	// members: attributes, methods
 	// attributes: iban, balance
+	// instance variable -> iban
 	private final String iban; // hidden?
-	private double balance; // hidden?
+	// instance variable -> balance
+	protected double balance; // hidden?
 	// methods: constructor, getter, withdraw, deposit
 
+	// overloading
 	public Account(String iban) { // constructor #1
 		this.iban = iban;
 		this.balance = 0.0;
 	}
 
+	// overloading
 	public Account(String iban, double balance) { // constructor #2
 		this.iban = iban;
 		this.balance = balance;
@@ -37,6 +43,7 @@ public class Account extends Object {
 
 	// business method
 	public boolean withdraw(double amount) {
+		System.out.println("Account::withdraw");		
 		// validation rule
 		if (amount <= 0.0)
 			return false;
@@ -48,8 +55,9 @@ public class Account extends Object {
 		return true;
 	}
 	
+	@Override
 	public String toString() {
-		return "Account[iban: %s, balance: %16.2f]".formatted(
+		return "Account[iban: %-24s, balance: %-16.2f]".formatted(
 				this.iban,this.balance);
 	}
 }
