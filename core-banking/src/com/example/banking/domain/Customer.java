@@ -31,6 +31,18 @@ public final class Customer {
 		this.accounts.add(account);
 	}
 	
+	public int getNumberOfAccounts() {
+		return this.accounts.size();
+	}
+	
+	public Account findAccountByIban(String iban) {
+		for (Account account : this.accounts) {
+			if (account.getIban().equals(iban))
+				return account;
+		}
+		return null;
+	}
+	
 	public double getTotalBalance() {
 		double total = 0.0;
 		for (Account account : this.accounts) {
