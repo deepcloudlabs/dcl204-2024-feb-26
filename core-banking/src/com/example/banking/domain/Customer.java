@@ -30,4 +30,13 @@ public final class Customer {
 	public void addAccount(Account account) {
 		this.accounts.add(account);
 	}
+	
+	public double getTotalBalance() {
+		double total = 0.0;
+		for (Account account : this.accounts) {
+			account.withdraw(0.01);
+			total += account.getBalance();
+		}
+		return total;
+	}
 }
