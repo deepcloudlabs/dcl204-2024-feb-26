@@ -32,5 +32,6 @@ public class BankingApplication {
 		System.out.println(jack.getFullName()); 
 		System.out.println(jack.getFullName().toUpperCase());
 		System.out.println(jack.getFullName()); 
+		System.out.println(jack.getTotalBalance());
 	}
 }
