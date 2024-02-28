@@ -8,7 +8,7 @@ public class Account extends Object {
 	// instance variable -> iban
 	private final String iban; // hidden?
 	// instance variable -> balance
-	private double balance; // hidden?
+	protected double balance; // hidden?
 	// methods: constructor, getter, withdraw, deposit
 
 	// overloading
@@ -43,6 +43,7 @@ public class Account extends Object {
 
 	// business method
 	public boolean withdraw(double amount) {
+		System.out.println("Account::withdraw");		
 		// validation rule
 		if (amount <= 0.0)
 			return false;
