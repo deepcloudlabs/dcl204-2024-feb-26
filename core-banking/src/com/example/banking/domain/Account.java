@@ -2,7 +2,7 @@ package com.example.banking.domain;
 // OOP: i) Class/Object -> Encapsulation + Information Hiding Principle
 //         Modeling/Abstraction
 //         Domain Class
-public class Account extends Object {
+public class Account  {
 	// members: attributes, methods
 	// attributes: iban, balance
 	// instance variable -> iban
@@ -21,7 +21,7 @@ public class Account extends Object {
 	public Account(String iban, double balance) { // constructor #2
 		this.iban = iban;
 		this.balance = balance;
-	}
+	} 
 
 	public String getIban() {
 		return this.iban;

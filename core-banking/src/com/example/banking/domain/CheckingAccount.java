@@ -23,8 +23,14 @@ public class CheckingAccount extends Account {
 			return false;
 		this.balance = this.balance - amount;
 		return true;
+	} 
+	void fun(double x) {
+		this.balance += x;
+		return;
 	}
-	
+	void gun() {
+		this.balance--;		
+	}
 	@Override
 	public String toString() {
 		return "CehckingAccount[iban: %-24s, balance: %-16.2f, overdraftAmount: %8.3f]".formatted(
