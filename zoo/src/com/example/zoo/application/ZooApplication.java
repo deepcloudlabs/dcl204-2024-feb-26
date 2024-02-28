@@ -24,6 +24,8 @@ public class ZooApplication {
 			animal.eat();
 			if (animal instanceof Pet)
 			   ((Pet)animal).play();
+			if (animal instanceof Pet pet)
+				pet.play();
 		}
 	}
 }
