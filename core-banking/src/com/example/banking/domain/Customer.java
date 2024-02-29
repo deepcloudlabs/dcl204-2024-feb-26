@@ -2,7 +2,6 @@ package com.example.banking.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class Customer {
 	private final String identity;
