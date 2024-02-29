@@ -42,12 +42,22 @@ public final class Customer {
 		return null;
 	}
 	
+	// imperative programming
 	public double getTotalBalance() {
 		double total = 0.0;
 		for (Account account : this.accounts) {
-			account.withdraw(0.01);
 			total += account.getBalance();
 		}
 		return total;
 	}
+	// declarative programming: functional programming
+	public double getTotalBalanceDeclarativeVersion() {
+		return this.accounts
+				   .stream()
+				   .parallel()
+				   .mapToDouble(Account::getBalance) // higher-order function
+				   .sum();
+	}
+	
+	
 }
