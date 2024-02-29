@@ -8,6 +8,7 @@ import java.util.List;
 public class StudyList {
 
 	public static void main(String[] args) {
+		// Linear Collection
 		// 1. Allows duplicate 2. Ordered -> Sortable
 		// Implementations: ArrayList, LinkedList
 		List<Integer> numbers = new ArrayList<>();
@@ -34,6 +35,7 @@ public class StudyList {
 		System.out.println(numbers);
 		numbers.sort(numericOrderAsc.reversed());
 		System.out.println(numbers);
+		System.out.println(numbers.contains(108));
 		
 	}
 

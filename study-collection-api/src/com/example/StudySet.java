@@ -6,6 +6,7 @@ import java.util.TreeSet;
 public class StudySet {
 
 	public static void main(String[] args) {
+		// Linear Collection		
 		// 1. Unique 2. Unordered -> Not Sortable
 		// Implementations: HashSet, LinkedHashSet, TreeSet
 		Set<Integer> numbers = new TreeSet<>((x,y)->y-x);
