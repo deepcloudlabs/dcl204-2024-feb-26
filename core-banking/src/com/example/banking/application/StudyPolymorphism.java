@@ -4,6 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.example.banking.domain.Account;
 import com.example.banking.domain.CheckingAccount;
+import com.example.banking.domain.exception.InsufficientBalanceException;
 
 public class StudyPolymorphism {
 
@@ -14,8 +15,14 @@ public class StudyPolymorphism {
 		else
 			account = new CheckingAccount("TR1", 20_000, 1_000);
 		System.out.println(account.getClass().getName());
-		account.withdraw(500);
-
+		try {
+			account.withdraw(25_000);
+		} catch (InsufficientBalanceException e) {
+			account.deposit(e.getDeficit());
+		} catch (IllegalArgumentException e) {
+			System.err.println(String.format("Failed: %s", e.getMessage()));
+		}
+		System.out.println(account);
 	}
 
 }

@@ -1,4 +1,7 @@
 package com.example.banking.domain;
+
+import com.example.banking.domain.exception.InsufficientBalanceException;
+
 // OOP: i) Class/Object -> Encapsulation + Information Hiding Principle
 //         Modeling/Abstraction
 //         Domain Class
@@ -32,29 +35,33 @@ public class Account  {
 	}
 	
 	// business method
-	public boolean deposit(double amount) {
-		// validation
+	public double deposit(double amount) { 
+		// validation rule
 		if (amount <= 0.0)
-			return false;
+			throw new IllegalArgumentException("Amount must be positive");
 		// business logic
 		this.balance = this.balance + amount;
-		return true;
+		return this.balance;
 	}
 
 	// business method
-	public boolean withdraw(double amount) {
+	public double withdraw(double amount) throws InsufficientBalanceException {
 		System.out.println("Account::withdraw");		
 		// validation rule
 		if (amount <= 0.0)
-			return false;
+			throw new IllegalArgumentException("Amount must be positive");
 		// business rule
-		if (amount > this.balance)
-			return false;
+		if (amount > this.balance) {
+			double deficit = amount - this.balance;
+			throw new InsufficientBalanceException("Your balance does not cover your expenses.",deficit);
+		}
 		// business logic
 		this.balance = this.balance - amount;
-		return true;
+		return this.balance;
 	}
 	
+
+
 	@Override
 	public String toString() {
 		return "Account[iban: %-24s, balance: %-16.2f]".formatted(

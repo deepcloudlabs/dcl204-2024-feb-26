@@ -2,12 +2,15 @@ package com.example.banking.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+
+import com.example.banking.domain.exception.InsufficientBalanceException;
 
 @DisplayName("An account")
 class AccountTest {
@@ -20,7 +23,7 @@ class AccountTest {
 		assertEquals(iban, account.getIban());
 		assertEquals(balance, account.getBalance());
 	}
-	
+
 	@DisplayName("successfully created")
 	@Test
 	void createAccountWithZerBalanceSuccessfully() {
@@ -31,83 +34,79 @@ class AccountTest {
 
 	@DisplayName("deposit with negative amount should return false")
 	@Test
-	void depositWithNegativeAmountShouldFail() {
+	void depositWithNegativeAmountShouldFail() throws Throwable {
 		// 1. Test Fixture/Setup
 		Account account = new Account("tr1", 1_000);
 		// 2. Call Exercise Method: deposit
-		boolean result = account.deposit(-1);
 		// 3. Verification
-		assertFalse(result);
+		assertThrows(IllegalArgumentException.class, () -> account.deposit(-1));
+		assertEquals(1_000, account.getBalance());
 		// 4. Tear down
 	}
 
 	@DisplayName("deposit with positive amount should be successful")
 	@Test
-	void depositWithPositiveAmountShouldSuccess() {
+	void depositWithPositiveAmountShouldSuccess() throws Throwable {
 		// 1. Test Fixture/Setup
 		Account account = new Account("tr1", 1_000);
 		// 2. Call Exercise Method: deposit
-		boolean result = account.deposit(1);
+		double balance = account.deposit(1);
 		// 3. Verification
-		assertTrue(result);
-		assertEquals(1_001, account.getBalance());
+		assertEquals(1_001, balance);
 		// 4. Tear down
 	}
 
 	@DisplayName("withdraw with negative amount should return false")
 	@Test
-	void withdrawWithNegativeAmountShouldFail() {
+	void withdrawWithNegativeAmountShouldFail() throws Throwable {
 		// 1. Test Fixture/Setup
 		Account account = new Account("tr1", 1_000);
 		// 2. Call Exercise Method: deposit
-		boolean result = account.withdraw(-1);
 		// 3. Verification
-		assertFalse(result);
+		assertThrows(IllegalArgumentException.class, () -> account.withdraw(-1));
+		assertEquals(1_000, account.getBalance());
 		// 4. Tear down
 	}
 
 	@DisplayName("withdraw with amount less than balance should be successful")
 	@Test
-	void withdrwWithAmountLessThanBalanceShouldSuccess() {
+	void withdrwWithAmountLessThanBalanceShouldSuccess() throws Throwable {
 		// 1. Test Fixture/Setup
 		Account account = new Account("tr1", 1_000);
 		// 2. Call Exercise Method: deposit
-		boolean result = account.withdraw(1);
+		double balance = account.withdraw(1);
 		// 3. Verification
-		assertTrue(result);
-		assertEquals(999, account.getBalance());
+		assertEquals(999, balance);
 		// 4. Tear down
 	}
 
 	@DisplayName("withdraw all balance should be successful")
 	@Test
-	void withdrwAllBalanceShouldSuccess() {
+	void withdrwAllBalanceShouldSuccess() throws Throwable {
 		// 1. Test Fixture/Setup
 		Account account = new Account("tr1", 1_000);
 		// 2. Call Exercise Method: deposit
-		boolean result = account.withdraw(1_000);
+		double balance = account.withdraw(1_000);
 		// 3. Verification
-		assertTrue(result);
-		assertEquals(0, account.getBalance());
+		assertEquals(0, balance);
 		// 4. Tear down
 	}
-	
+
 	@DisplayName("withdraw more than balance should fail")
 	@Test
-	void withdrwMoreThanBalanceShouldFail() {
+	void withdrwMoreThanBalanceShouldFail() throws Throwable {
 		// 1. Test Fixture/Setup
 		Account account = new Account("tr1", 1_000);
 		// 2. Call Exercise Method: deposit
-		boolean result = account.withdraw(1_000.1);
 		// 3. Verification
-		assertFalse(result);
+		assertThrows(InsufficientBalanceException.class, () -> account.withdraw(1_000.1));
 		assertEquals(1_000, account.getBalance());
 		// 4. Tear down
 	}
-	
+
 	@DisplayName("toString should contain iban and balance")
 	@Test
-	void toStringShouldContainIbanAndBalance() {
+	void toStringShouldContainIbanAndBalance() throws Throwable {
 		// 1. Test Fixture/Setup
 		Account account = new Account("tr1", 1_000);
 		// 2. Call Exercise Method: deposit

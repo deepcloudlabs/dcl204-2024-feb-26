@@ -3,6 +3,7 @@ package com.example.banking.application;
 import com.example.banking.domain.Account;
 import com.example.banking.domain.CheckingAccount;
 import com.example.banking.domain.Customer;
+import com.example.banking.domain.exception.InsufficientBalanceException;
 
 @SuppressWarnings("unused")
 public class BankingApplication {
@@ -11,13 +12,17 @@ public class BankingApplication {
 		// acc1: i) reference (type is Account) variable
 		//      ii) local variable (inside a method/function)   
 		Account acc1 = new Account("tr1", 0.0);
-		acc1.withdraw(200_000_000);
+		try {
+			acc1.withdraw(200_000_000);
+		} catch (InsufficientBalanceException e) {}
 		System.out.println(acc1);
-		// Error: final -> acc1.iban = "tr4";
+		// Error: final -> acc1.iban = "tr4"; 
 		// uses constructor #1
 		Account acc2 = new CheckingAccount("tr2",10_000, 5_000);
 		acc2.deposit(10_000_000);
-		acc2.withdraw(200_000_000);
+		try {
+			acc2.withdraw(200_000_000);
+		} catch (InsufficientBalanceException e) {}
 		System.out.println(acc2); 
 		// numbers: i) value-typed variable
 		//         ii) local variable 
