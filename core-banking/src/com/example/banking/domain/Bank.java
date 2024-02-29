@@ -48,11 +48,29 @@ public final class Bank { // Deadline: 10:10am
 		return Optional.empty();
 	}
 
+	public Optional<Customer> findCustomerByIdentity2(String identity) {
+		return customers.stream()
+				        .filter(customer -> customer.getIdentity().equals(identity))
+				        .findFirst();
+	}
+	
 	public double getTotalBalance() {
 		double totalBalance = 0.0;
 		for (var customer : this.customers) {
 			totalBalance += customer.getTotalBalance();
 		}
 		return totalBalance;
+	}
+	public double getTotalBalance2() {
+		return this.customers
+				   .stream()
+				   .mapToDouble(customer -> customer.getTotalBalance())
+				   .sum();
+	}
+	public double getTotalBalance3() {
+		return this.customers
+				.stream()
+				.mapToDouble(Customer::getTotalBalance) // method reference
+				.sum();
 	}
 }
